@@ -1,0 +1,11 @@
+node_modules/
+.next/
+.env
+.env.local
+storage/
+coverage/
+*.log
+.DS_Store
+*.tsbuildinfo
+.impeccable/screenshots/
+.impeccable/sketches/

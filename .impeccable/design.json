@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-19T08:56:00Z",
+  "title": "Design System: LUMA Store",
+  "extensions": {
+    "colorMeta": {
+      "mineral-canvas": { "role": "neutral", "displayName": "Toile minerale", "canonical": "#f7f7fb", "tonalRamp": ["oklch(15% 0.006 285)", "oklch(25% 0.006 285)", "oklch(35% 0.006 285)", "oklch(45% 0.006 285)", "oklch(55% 0.006 285)", "oklch(65% 0.006 285)", "oklch(80% 0.006 285)", "oklch(95% 0.006 285)"] },
+      "pure-surface": { "role": "neutral", "displayName": "Surface pure", "canonical": "#ffffff", "tonalRamp": ["oklch(15% 0 0)", "oklch(25% 0 0)", "oklch(35% 0 0)", "oklch(45% 0 0)", "oklch(55% 0 0)", "oklch(65% 0 0)", "oklch(80% 0 0)", "oklch(95% 0 0)"] },
+      "mineral-subtle": { "role": "neutral", "displayName": "Mineral discret", "canonical": "#f0f0f7", "tonalRamp": ["oklch(15% 0.014 285)", "oklch(25% 0.014 285)", "oklch(35% 0.014 285)", "oklch(45% 0.014 285)", "oklch(55% 0.014 285)", "oklch(65% 0.014 285)", "oklch(80% 0.014 285)", "oklch(95% 0.014 285)"] },
+      "aubergine-ink": { "role": "neutral", "displayName": "Encre aubergine", "canonical": "#17182f", "tonalRamp": ["oklch(15% 0.04 285)", "oklch(25% 0.04 285)", "oklch(35% 0.04 285)", "oklch(45% 0.04 285)", "oklch(55% 0.04 285)", "oklch(65% 0.04 285)", "oklch(80% 0.04 285)", "oklch(95% 0.04 285)"] },
+      "slate-muted": { "role": "neutral", "displayName": "Ardoise attenuee", "canonical": "#626477", "tonalRamp": ["oklch(15% 0.03 285)", "oklch(25% 0.03 285)", "oklch(35% 0.03 285)", "oklch(45% 0.03 285)", "oklch(55% 0.03 285)", "oklch(65% 0.03 285)", "oklch(80% 0.03 285)", "oklch(95% 0.03 285)"] },
+      "mist-line": { "role": "neutral", "displayName": "Ligne de brume", "canonical": "#e2e2eb", "tonalRamp": ["oklch(15% 0.015 285)", "oklch(25% 0.015 285)", "oklch(35% 0.015 285)", "oklch(45% 0.015 285)", "oklch(55% 0.015 285)", "oklch(65% 0.015 285)", "oklch(80% 0.015 285)", "oklch(95% 0.015 285)"] },
+      "luma-iris": { "role": "primary", "displayName": "Iris LUMA", "canonical": "#5b5ceb", "tonalRamp": ["oklch(15% 0.19 280)", "oklch(25% 0.19 280)", "oklch(35% 0.19 280)", "oklch(45% 0.19 280)", "oklch(55% 0.19 280)", "oklch(65% 0.19 280)", "oklch(80% 0.19 280)", "oklch(95% 0.19 280)"] },
+      "deep-iris": { "role": "primary", "displayName": "Iris profond", "canonical": "#4142bd", "tonalRamp": ["oklch(15% 0.16 280)", "oklch(25% 0.16 280)", "oklch(35% 0.16 280)", "oklch(45% 0.16 280)", "oklch(55% 0.16 280)", "oklch(65% 0.16 280)", "oklch(80% 0.16 280)", "oklch(95% 0.16 280)"] },
+      "iris-wash": { "role": "primary", "displayName": "Lavis iris", "canonical": "#ebebff", "tonalRamp": ["oklch(15% 0.05 285)", "oklch(25% 0.05 285)", "oklch(35% 0.05 285)", "oklch(45% 0.05 285)", "oklch(55% 0.05 285)", "oklch(65% 0.05 285)", "oklch(80% 0.05 285)", "oklch(95% 0.05 285)"] },
+      "verified-green": { "role": "tertiary", "displayName": "Vert verifie", "canonical": "#147a52", "tonalRamp": ["oklch(15% 0.13 157)", "oklch(25% 0.13 157)", "oklch(35% 0.13 157)", "oklch(45% 0.13 157)", "oklch(55% 0.13 157)", "oklch(65% 0.13 157)", "oklch(80% 0.13 157)", "oklch(95% 0.13 157)"] },
+      "caution-amber": { "role": "tertiary", "displayName": "Ambre de vigilance", "canonical": "#9b5c00", "tonalRamp": ["oklch(15% 0.15 72)", "oklch(25% 0.15 72)", "oklch(35% 0.15 72)", "oklch(45% 0.15 72)", "oklch(55% 0.15 72)", "oklch(65% 0.15 72)", "oklch(80% 0.15 72)", "oklch(95% 0.15 72)"] },
+      "withdrawal-red": { "role": "tertiary", "displayName": "Rouge de retrait", "canonical": "#b42337", "tonalRamp": ["oklch(15% 0.16 20)", "oklch(25% 0.16 20)", "oklch(35% 0.16 20)", "oklch(45% 0.16 20)", "oklch(55% 0.16 20)", "oklch(65% 0.16 20)", "oklch(80% 0.16 20)", "oklch(95% 0.16 20)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display Sora", "purpose": "Hero et grands titres de detail uniquement." },
+      "headline": { "displayName": "Headline Sora", "purpose": "Entrees de sections et titres d'administration." },
+      "title": { "displayName": "Title Sora", "purpose": "Rails, panneaux et groupes d'informations." },
+      "body": { "displayName": "Body Manrope", "purpose": "Descriptions, recherche et contenu courant." },
+      "label": { "displayName": "Label Manrope", "purpose": "Boutons, filtres, statuts et controles compacts." }
+    },
+    "shadows": [
+      { "name": "ambient-card", "value": "0 12px 32px rgba(23, 24, 47, .09)", "purpose": "Survol des cartes, etiquettes flottantes et panneaux isoles." },
+      { "name": "primary-action", "value": "0 8px 20px rgba(91, 92, 235, .22)", "purpose": "Action principale au repos." },
+      { "name": "primary-action-hover", "value": "0 12px 26px rgba(91, 92, 235, .27)", "purpose": "Action principale au survol." },
+      { "name": "logo-depth", "value": "drop-shadow(0 24px 30px rgba(24, 24, 58, .17))", "purpose": "Logo central de la scene de plateformes." },
+      { "name": "focus-halo", "value": "0 0 0 4px var(--accent-soft)", "purpose": "Recherche active, completee par une bordure iris." }
+    ],
+    "motion": [
+      { "name": "interaction-standard", "value": "200ms ease", "purpose": "Couleur, ombre et bordure des controles courants." },
+      { "name": "lift-spring", "value": "250ms cubic-bezier(.2,.8,.2,1)", "purpose": "Soulevement des cartes et actions interactives." },
+      { "name": "orbit-breathe", "value": "6s ease-in-out infinite alternate", "purpose": "Respiration lente de l'orbite du hero; neutralisee avec prefers-reduced-motion." }
+    ],
+    "breakpoints": [
+      { "name": "tablet", "value": "900px" },
+      { "name": "mobile", "value": "620px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Action dominante, tactile et confiante.",
+      "html": "<button class=\"ds-btn-primary\">Explorer le catalogue <span aria-hidden=\"true\">→</span></button>",
+      "css": ".ds-btn-primary { min-height:44px; border:0; border-radius:10px; padding:10px 17px; display:inline-flex; align-items:center; justify-content:center; gap:8px; color:#fff; background:var(--accent,#5b5ceb); font-family:var(--font-body,Manrope,sans-serif); font-size:.82rem; font-weight:750; cursor:pointer; box-shadow:0 8px 20px rgba(91,92,235,.22); transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s ease,background .2s ease; } .ds-btn-primary:hover { transform:translateY(-2px); background:var(--accent-dark,#4142bd); box-shadow:0 12px 26px rgba(91,92,235,.27); } .ds-btn-primary:focus-visible { outline:3px solid rgba(91,92,235,.42); outline-offset:3px; } .ds-btn-primary:active { transform:translateY(0); }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Action de soutien sur surface blanche.",
+      "html": "<button class=\"ds-btn-secondary\">Integrer les mises a jour</button>",
+      "css": ".ds-btn-secondary { min-height:44px; border:0; border-radius:10px; padding:10px 17px; color:var(--ink,#17182f); background:var(--surface,#fff); font-family:var(--font-body,Manrope,sans-serif); font-size:.82rem; font-weight:750; cursor:pointer; box-shadow:inset 0 0 0 1px var(--line,#e2e2eb); transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s ease; } .ds-btn-secondary:hover { transform:translateY(-2px); box-shadow:inset 0 0 0 1px #cfd0dc,0 8px 18px rgba(23,24,47,.07); } .ds-btn-secondary:focus-visible { outline:3px solid rgba(91,92,235,.42); outline-offset:3px; } .ds-btn-secondary:active { transform:translateY(0); }"
+    },
+    {
+      "name": "Catalogue Search",
+      "kind": "input",
+      "refersTo": "search-field",
+      "description": "Recherche centrale de l'en-tete, visible comme point d'entree principal.",
+      "html": "<label class=\"ds-search\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"7\"></circle><path d=\"m20 20-3.8-3.8\"></path></svg><span class=\"ds-sr-only\">Rechercher</span><input type=\"search\" placeholder=\"Rechercher une application\"></label>",
+      "css": ".ds-search { height:44px; width:min(560px,100%); padding:0 15px; display:flex; align-items:center; gap:10px; color:var(--ink,#17182f); background:var(--surface,#fff); border:1px solid var(--line,#e2e2eb); border-radius:12px; transition:box-shadow .2s ease,border-color .2s ease; } .ds-search svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:2; } .ds-search input { width:100%; border:0; outline:0; background:transparent; color:inherit; font-family:var(--font-body,Manrope,sans-serif); font-size:1rem; } .ds-search input::placeholder { color:#6e7081; } .ds-search:focus-within { border-color:var(--accent,#5b5ceb); box-shadow:0 0 0 4px var(--accent-soft,#ebebff); } .ds-sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }"
+    },
+    {
+      "name": "Platform Filter",
+      "kind": "chip",
+      "refersTo": "platform-filter-active",
+      "description": "Filtre natif compact; l'etat selectionne emploie un lavis iris.",
+      "html": "<div class=\"ds-filter-row\"><button class=\"ds-platform-filter is-active\">Toutes les plateformes</button><button class=\"ds-platform-filter\">Windows</button><button class=\"ds-platform-filter\">macOS</button></div>",
+      "css": ".ds-filter-row { display:flex; gap:8px; overflow:auto; padding:2px; } .ds-platform-filter { min-height:38px; padding:8px 13px; white-space:nowrap; color:var(--muted,#626477); background:var(--surface,#fff); border:1px solid var(--line,#e2e2eb); border-radius:9px; font-family:var(--font-body,Manrope,sans-serif); font-size:.82rem; font-weight:750; cursor:pointer; } .ds-platform-filter:hover,.ds-platform-filter.is-active { color:var(--accent-dark,#4142bd); background:var(--accent-soft,#ebebff); border-color:#d7d7ff; } .ds-platform-filter:focus-visible { outline:3px solid rgba(91,92,235,.42); outline-offset:3px; } .ds-platform-filter:active { transform:translateY(1px); }"
+    },
+    {
+      "name": "Category Chip",
+      "kind": "chip",
+      "refersTo": "category-chip-active",
+      "description": "Capsule de categorie, neutre au repos et aubergine lorsqu'elle est active.",
+      "html": "<div class=\"ds-chip-row\"><button class=\"ds-category-chip is-active\">Toutes les categories</button><button class=\"ds-category-chip\">Infrastructure</button></div>",
+      "css": ".ds-chip-row { display:flex; gap:9px; overflow:auto; padding:2px; } .ds-category-chip { padding:8px 14px; white-space:nowrap; color:var(--ink,#17182f); background:var(--surface,#fff); border:1px solid var(--line,#e2e2eb); border-radius:999px; font-family:var(--font-body,Manrope,sans-serif); font-size:.85rem; font-weight:700; cursor:pointer; transition:color .2s ease,background .2s ease,border-color .2s ease; } .ds-category-chip:hover,.ds-category-chip.is-active { color:#fff; background:var(--ink,#17182f); border-color:var(--ink,#17182f); } .ds-category-chip:focus-visible { outline:3px solid rgba(91,92,235,.42); outline-offset:3px; } .ds-category-chip:active { transform:translateY(1px); }"
+    },
+    {
+      "name": "Application Card",
+      "kind": "card",
+      "refersTo": "app-card",
+      "description": "Unite canonique du rail, avec identite, resume, plateformes et version.",
+      "html": "<a class=\"ds-app-card\" href=\"#\"><div class=\"ds-app-card-top\"><span class=\"ds-app-icon\">L</span><div><h3>LUMA Agent</h3><span class=\"ds-publisher\">LUMA</span></div><span class=\"ds-chevron\" aria-hidden=\"true\">›</span></div><p>Supervision et maintenance des machines de l'ecosysteme.</p><div class=\"ds-card-meta\"><span><span class=\"ds-platform-tag\">WIN</span> <span class=\"ds-platform-tag\">LINUX</span></span><span>Aucune version</span></div></a>",
+      "css": ".ds-app-card { box-sizing:border-box; width:355px; min-height:190px; padding:22px; display:flex; flex-direction:column; color:var(--ink,#17182f); background:var(--surface,#fff); border:1px solid transparent; border-radius:var(--radius,14px); text-decoration:none; font-family:var(--font-body,Manrope,sans-serif); transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s ease,border-color .25s ease; } .ds-app-card:hover { transform:translateY(-5px); box-shadow:0 12px 32px rgba(23,24,47,.09); border-color:#eeeeff; } .ds-app-card:focus-visible { outline:3px solid rgba(91,92,235,.42); outline-offset:3px; } .ds-app-card:active { transform:translateY(-2px); } .ds-app-card-top { display:grid; grid-template-columns:64px 1fr auto; gap:15px; align-items:center; } .ds-app-icon { width:64px; height:64px; display:grid; place-items:center; border-radius:15px; color:var(--accent,#5b5ceb); background:#ebeaff; font-family:var(--font-display,Sora,sans-serif); font-size:1.45rem; font-weight:800; } .ds-app-card h3 { margin:0 0 3px; font-family:var(--font-display,Sora,sans-serif); font-size:1.04rem; letter-spacing:-.02em; } .ds-publisher,.ds-card-meta { color:var(--muted,#626477); font-size:.78rem; } .ds-chevron { color:#8a8b9a; font-size:28px; } .ds-app-card>p { margin:18px 0 22px; color:var(--muted,#626477); font-size:.9rem; } .ds-card-meta { margin-top:auto; display:flex; justify-content:space-between; align-items:center; gap:12px; font-size:.76rem; } .ds-platform-tag { display:inline-flex; align-items:center; min-width:27px; height:25px; padding:0 7px; border-radius:7px; background:var(--surface-subtle,#f0f0f7); color:#56586c; font-size:.68rem; font-weight:800; }"
+    },
+    {
+      "name": "Admin Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Champ d'administration sobre, dense et explicitement libelle.",
+      "html": "<label class=\"ds-field\"><span>Version</span><input value=\"1.0.0\" aria-label=\"Version\"></label>",
+      "css": ".ds-field { display:grid; gap:7px; color:var(--ink,#17182f); font-family:var(--font-body,Manrope,sans-serif); } .ds-field span { font-size:.82rem; font-weight:750; } .ds-field input { width:100%; box-sizing:border-box; padding:11px 12px; color:var(--ink,#17182f); background:var(--surface,#fff); border:1px solid #cfd0dc; border-radius:10px; font:inherit; transition:border-color .2s ease,box-shadow .2s ease; } .ds-field input:hover { border-color:#aeb0c0; } .ds-field input:focus-visible { outline:3px solid rgba(91,92,235,.42); outline-offset:3px; border-color:var(--accent,#5b5ceb); }"
+    },
+    {
+      "name": "Icon Action",
+      "kind": "button",
+      "description": "Action compacte de tableau pour telecharger, proteger ou retirer.",
+      "html": "<button class=\"ds-icon-button\" aria-label=\"Telecharger\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 3v12m0 0 4-4m-4 4-4-4M5 19h14\"></path></svg></button>",
+      "css": ".ds-icon-button { width:36px; height:36px; border:0; border-radius:9px; display:inline-grid; place-items:center; color:var(--ink,#17182f); background:var(--surface-subtle,#f0f0f7); cursor:pointer; transition:color .2s ease,background .2s ease,transform .2s ease; } .ds-icon-button svg { width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; } .ds-icon-button:hover { color:var(--accent-dark,#4142bd); background:var(--accent-soft,#ebebff); } .ds-icon-button:focus-visible { outline:3px solid rgba(91,92,235,.42); outline-offset:3px; } .ds-icon-button:active { transform:translateY(1px); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Le Rayon officiel",
+    "overview": "LUMA Store est un store contemporain familier, traite comme un point de distribution officiel plutot que comme une vitrine publicitaire. Son monde visuel associe des surfaces minerales presque blanches, une encre aubergine tres sombre et l'iris LUMA pour rendre la provenance, la compatibilite et l'action immediatement reconnaissables.\n\nLa composition reste aeree mais informative : recherche centrale, rails horizontaux d'applications, icones optiques et controles qui reprennent les reflexes des stores natifs. L'identite s'exprime par la precision des hierarchies, les cartes en leger relief et l'illustration orbitale des plateformes, sans masquer les informations de version ou d'integrite.",
+    "keyCharacteristics": [
+      "Store logiciel clair, confiant et non promotionnel.",
+      "Surfaces minerales, encre aubergine et accent iris rare mais decisif.",
+      "Recherche, filtres de plateforme et rails d'applications visibles tres tot.",
+      "Compatibilite et integrite traitees comme du contenu principal.",
+      "Geometrie doucement arrondie et mouvement bref, avec reduction d'animation respectee."
+    ],
+    "rules": [
+      { "name": "The Official Iris Rule", "body": "L'iris signale la marque, une action ou une selection; il ne devient jamais un remplissage decoratif de page.", "section": "colors" },
+      { "name": "The Status Has a Name Rule", "body": "Un etat semantique conserve toujours un libelle ou une icone explicite; la couleur seule ne porte jamais l'information.", "section": "colors" },
+      { "name": "The Two-Voice Rule", "body": "Sora porte la structure et Manrope porte l'usage; aucune troisieme voix typographique n'est introduite hors du code monospace.", "section": "typography" },
+      { "name": "The Tight Display Rule", "body": "Les grands titres utilisent une chasse serree et des retours equilibres, mais le corps conserve un rythme normal pour la lisibilite.", "section": "typography" },
+      { "name": "The First-Rail Rule", "body": "La recherche, l'introduction et le debut du catalogue doivent rester perceptibles sans transformer le premier viewport en affiche publicitaire.", "section": "layout" },
+      { "name": "The Horizontal Continuity Rule", "body": "Sur petit ecran, filtres, garanties et cartes defilent lateralement plutot que de s'ecraser ou de produire des colonnes trop etroites.", "section": "layout" },
+      { "name": "The Lift on Intent Rule", "body": "Une surface ne se souleve qu'en reponse a l'intention, au focus ou lorsqu'elle flotte reellement dans la composition.", "section": "elevation" },
+      { "name": "The Radius Ladder Rule", "body": "Les tags sont les plus compacts, les controles viennent ensuite, les cartes et icones ferment la progression; ne pas appliquer une capsule universelle a tous les elements.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do faire apparaitre la compatibilite et l'integrite avant ou au meme niveau que l'action de telechargement.",
+      "Do reserver Sora aux titres, a la marque et aux reperes structurels; utiliser Manrope pour l'usage courant.",
+      "Do conserver un contraste lisible, un focus visible et un libelle textuel pour chaque etat semantique.",
+      "Do transformer les groupes denses en rails horizontaux tactiles sur petit ecran.",
+      "Do respecter prefers-reduced-motion pour toutes les animations et transitions."
+    ],
+    "donts": [
+      "Don't transformer le store en catalogue publicitaire, en mosaïque promotionnelle ou en page de campagne.",
+      "Don't utiliser l'iris, les ombres ou les capsules sur chaque element; leur rarete construit la hierarchie.",
+      "Don't cacher la plateforme, la version ou la provenance derriere une interaction secondaire.",
+      "Don't inventer de volumes de telechargement, de disponibilite ou de preuve sociale absents du produit.",
+      "Don't transmettre un statut uniquement par sa couleur."
+    ]
+  }
+}

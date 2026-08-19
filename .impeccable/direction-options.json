@@ -1,0 +1,76 @@
+{
+  "title": "Choisir l’univers visuel de LUMA Store",
+  "question": "Quel langage doit porter le catalogue, les versions et l’administration ?",
+  "options": [
+    {
+      "id": "dispatch-ledger",
+      "label": "Bordereau de distribution",
+      "kicker": "DIRECTION PROPOSÉE",
+      "lineage": "Bordereaux d’expédition, étiquettes d’entrepôt et manifestes de colis",
+      "thesis": "Chaque version est un colis logiciel identifié, contrôlé puis acheminé vers la bonne machine.",
+      "palette": ["#F2F0E8", "#161916", "#FF5C35", "#B9D8C2"],
+      "materials": ["papier minéral", "encre de contrôle", "étiquettes découpées"],
+      "viewport": "Un manifeste vivant organise les applications en lignes d’expédition, avec plateformes, versions et intégrité visibles sans ouvrir de fiche.",
+      "risk": "Peut sembler administratif si les aperçus d’applications et les actions ne conservent pas assez de présence.",
+      "sketch": ".impeccable/sketches/dispatch-ledger.png"
+    },
+    {
+      "id": "doujin-catalog",
+      "label": "Catalogue de hall",
+      "kicker": "ALTERNATIVE",
+      "lineage": "Catalogues de conventions japonaises annotés à la main",
+      "thesis": "Le store devient une carte dense où chaque application occupe une case mémorable.",
+      "case": "Très forte identification au catalogue, mais la densité dessert les détails de compatibilité et l’administration.",
+      "palette": ["#E8E2D2", "#171713", "#E64B38", "#7A776D"],
+      "materials": ["papier journal", "encre unique", "annotations au stylo"],
+      "viewport": "Une grille compacte de vignettes numérotées relie chaque application à ses plateformes et à son chemin de téléchargement.",
+      "risk": "La densité peut fatiguer et donner trop peu d’espace aux états de sécurité.",
+      "sketch": ".impeccable/sketches/doujin-catalog.png",
+      "hero": "https://impeccable.style/worlds/cards/pop-culture-shelf-doujin-event-catalog-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/pop-culture-shelf-doujin-event-catalog.webp"
+    },
+    {
+      "id": "reference-rail",
+      "label": "Registre à rail central",
+      "kicker": "ALTERNATIVE",
+      "lineage": "Pages de référence réglées et appareils critiques imprimés",
+      "thesis": "Les plateformes forment un rail fixe entre le catalogue humain et le contrat machine.",
+      "case": "Excellente clarté documentaire, mais l’identité ressemble davantage à une référence technique qu’à un store.",
+      "palette": ["#EEE9DA", "#20201D", "#C33B2E", "#8C897F"],
+      "materials": ["papier non blanchi", "filets d’encre", "repères de composition"],
+      "viewport": "Deux colonnes d’applications s’articulent autour d’un rail de plateformes, versions et états de disponibilité.",
+      "risk": "Les petites tailles typographiques exigent une discipline responsive sévère.",
+      "sketch": ".impeccable/sketches/reference-rail.png",
+      "hero": "https://impeccable.style/worlds/cards/rw-centre-rail-reference-setting-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/rw-centre-rail-reference-setting.webp"
+    },
+    {
+      "id": "step-sequencer",
+      "label": "Séquenceur de versions",
+      "kicker": "ALTERNATIVE",
+      "lineage": "Boîtes à rythmes analogiques et séquenceurs à seize pas",
+      "thesis": "L’historique des versions devient une ligne temporelle manipulable, avec la release active comme pulsation.",
+      "case": "Interaction mémorable pour les versions, mais moins naturelle pour parcourir beaucoup d’applications.",
+      "palette": ["#242522", "#F0E9D8", "#E8533D", "#F1B84B"],
+      "materials": ["panneau charbon", "touches colorées", "sérigraphie blanche"],
+      "viewport": "Chaque application déroule ses versions sur une rangée de pas, la version stable éclairée sous un témoin mobile.",
+      "risk": "Le langage instrumental peut suggérer un outil créatif plutôt qu’un service de distribution.",
+      "sketch": ".impeccable/sketches/step-sequencer.png",
+      "hero": "https://impeccable.style/worlds/cards/signals-instruments-drum-machine-step-row-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/signals-instruments-drum-machine-step-row.webp"
+    }
+  ],
+  "reroll": true,
+  "canon": true,
+  "canonCard": {
+    "label": "Le standard du marché",
+    "lineage": "Stores logiciels contemporains",
+    "thesis": "Une grille familière d’applications, réalisée avec un haut niveau de finition.",
+    "palette": ["#F7F7F8", "#17181A", "#4E66F5", "#D9DCE5"],
+    "materials": ["surfaces neutres", "cartes illustrées", "contrôles natifs"],
+    "viewport": "Une navigation sobre, une grille de cartes et des fiches détaillées prévisibles.",
+    "risk": "Très lisible mais peu distinctif dans l’écosystème LUMA.",
+    "sketch": ".impeccable/sketches/canon.png"
+  },
+  "steer": true
+}
