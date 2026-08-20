@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { CheckCircle2, Plus, Trash2, UploadCloud, XCircle } from "lucide-react";
+import { uploadBinary } from "@/lib/upload";
 
 type AppOption = { id: string; name: string };
 type RowStatus = "pending" | "uploading" | "done" | "error";
@@ -21,24 +22,6 @@ const defaultPackage: Record<string, string> = { windows: "exe", macos: "dmg", l
 
 function newRow(): BinaryRow {
   return { id: crypto.randomUUID(), platform: "windows", architecture: "universal", packageType: "exe", minimumOs: "", file: null, status: "pending", error: null };
-}
-
-function uploadBinary(ticket: { uploadUrl: string; uploadToken: string }, file: File, onProgress: (percent: number) => void) {
-  return new Promise<void>((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open("PUT", ticket.uploadUrl);
-    xhr.setRequestHeader("Content-Type", file.type || "application/octet-stream");
-    xhr.setRequestHeader("X-Upload-Token", ticket.uploadToken);
-    xhr.setRequestHeader("X-File-Name", encodeURIComponent(file.name));
-    xhr.upload.onprogress = (upload) => upload.lengthComputable && onProgress(Math.round((upload.loaded / upload.total) * 100));
-    xhr.onload = () => {
-      if (xhr.status >= 200 && xhr.status < 300) return resolve();
-      const data = JSON.parse(xhr.responseText || "{}");
-      reject(new Error(data?.error?.message ?? "Téléversement impossible."));
-    };
-    xhr.onerror = () => reject(new Error("Connexion interrompue pendant l’envoi."));
-    xhr.send(file);
-  });
 }
 
 export function ReleaseForm({ apps }: { apps: AppOption[] }) {
@@ -113,7 +96,7 @@ export function ReleaseForm({ apps }: { apps: AppOption[] }) {
 
   return <form className="admin-form" onSubmit={submit}>
     <div className="field field-wide"><label htmlFor="applicationId">Application</label><select id="applicationId" name="applicationId" required disabled={loading}><option value="">Sélectionner…</option>{apps.map((app) => <option key={app.id} value={app.id}>{app.name}</option>)}</select></div>
-    <div className="field"><label htmlFor="version">Version</label><input id="version" name="version" required disabled={loading} placeholder="1.0.0" pattern="v?\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?" /></div>
+    <div className="field"><label htmlFor="version">Version</label><input id="version" name="version" required disabled={loading} placeholder="1.0.0" pattern="v?\d+\.\d+\.\d+(?:-[0-9A-Za-z.\-]+)?" /></div>
     <div className="field"><label htmlFor="channel">Canal</label><select id="channel" name="channel" disabled={loading}><option value="stable">Stable</option><option value="beta">Bêta</option><option value="nightly">Nightly</option></select></div>
     <div className="field field-wide"><label htmlFor="releaseNotes">Notes de version</label><textarea id="releaseNotes" name="releaseNotes" disabled={loading} /></div>
     <div className="field field-wide">

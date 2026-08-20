@@ -12,9 +12,15 @@ export async function DELETE(request: Request, context: { params: Promise<{ id: 
   if (!admin) return jsonError("Authentification requise.", 401, "unauthorized");
   const id = uuidSchema.safeParse((await context.params).id);
   if (!id.success) return jsonError("Version invalide.", 400, "validation_failed");
-  const release = await query<{ application_id: string; storage_key: string | null; is_protected: boolean }>("SELECT application_id, storage_key, is_protected FROM releases WHERE id=$1", [id.data]);
+  const release = await query<{ application_id: string; storage_key: string | null; is_protected: boolean; status: string }>("SELECT application_id, storage_key, is_protected, status FROM releases WHERE id=$1", [id.data]);
   const row = release.rows[0];
   if (!row) return jsonError("Version introuvable.", 404, "not_found");
+  if (row.status === "pending") {
+    await removeArtifact(row.storage_key);
+    await query("DELETE FROM releases WHERE id=$1", [id.data]);
+    await audit(admin.id, "release.cancel", "release", id.data);
+    return noStoreJson({ data: { id: id.data, status: "cancelled" } });
+  }
   if (row.is_protected) return jsonError("Cette version est protégée. Retirez d'abord sa protection.", 409, "release_protected");
   const count = await query<{ count: string }>("SELECT count(*) FROM releases WHERE application_id=$1 AND status='published'", [row.application_id]);
   if (Number(count.rows[0].count) <= config.MIN_VERSIONS_TO_KEEP) return jsonError(`Au moins ${config.MIN_VERSIONS_TO_KEEP} versions doivent être conservées.`, 409, "minimum_retention");

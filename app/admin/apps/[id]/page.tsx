@@ -10,5 +10,5 @@ export default async function EditApplication({ params }: { params: Promise<{ id
   const app = await getApplicationById(id.data);
   if (!app) notFound();
   const releases = await listReleases(app.id, false);
-  return <><div className="admin-heading"><div><h1>{app.name}</h1><p>Modifiez la fiche et gérez la rétention de ses versions.</p></div></div><ApplicationForm app={app} /><ReleaseManager initialReleases={releases.filter((release) => release.status === "published")} /></>;
+  return <><div className="admin-heading"><div><h1>{app.name}</h1><p>Modifiez la fiche et gérez la rétention de ses versions.</p></div></div><ApplicationForm app={app} /><ReleaseManager initialReleases={releases} /></>;
 }
