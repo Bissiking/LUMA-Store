@@ -31,6 +31,14 @@ export async function listApplications(options: { publicOnly?: boolean; query?: 
   return result.rows.map(mapApp);
 }
 
+export async function listApplicationsOrNull(options: Parameters<typeof listApplications>[0] = {}) {
+  try {
+    return await listApplications(options);
+  } catch {
+    return null;
+  }
+}
+
 export async function getApplication(slug: string, publicOnly = true) {
   const result = await query<AppRow>(`${appSelect} WHERE a.slug = $1 ${publicOnly ? "AND a.status = 'published'" : ""} GROUP BY a.id`, [slug]);
   return result.rows[0] ? mapApp(result.rows[0]) : null;

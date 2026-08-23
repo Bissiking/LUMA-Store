@@ -21,7 +21,9 @@ const schema = z.object({
   KYROS_SCOPE: z.string().default("profile email"),
   KYROS_SSO_VERSION: z.string().min(1).default("v3"),
   KYROS_EDITION: z.enum(["standard", "enterprise"]).default("standard"),
-  KYROS_APPLICATION_SCOPE: z.enum(["standard", "enterprise", "both"]).default("standard")
+  KYROS_APPLICATION_SCOPE: z.enum(["standard", "enterprise", "both"]).default("standard"),
+  ARGOS_BASE_URL: z.string().url().optional().or(z.literal("")),
+  ARGOS_TOKEN: z.string().optional().default("")
 });
 
 const parsed = schema.safeParse(process.env);
@@ -36,5 +38,6 @@ export const config = {
   ...parsed.data,
   isProduction,
   securityConfigured,
-  kyrosConfigured: Boolean(securityConfigured && parsed.data.KYROS_BASE_URL && parsed.data.KYROS_CLIENT_ID && parsed.data.KYROS_CLIENT_SECRET && parsed.data.KYROS_JWT_SECRET)
+  kyrosConfigured: Boolean(securityConfigured && parsed.data.KYROS_BASE_URL && parsed.data.KYROS_CLIENT_ID && parsed.data.KYROS_CLIENT_SECRET && parsed.data.KYROS_JWT_SECRET),
+  argosConfigured: Boolean(parsed.data.ARGOS_BASE_URL && parsed.data.ARGOS_TOKEN)
 };

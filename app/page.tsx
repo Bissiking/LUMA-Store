@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Boxes, CheckCircle2, Download, Laptop, PackageCheck, Smartphone, Terminal } from "lucide-react";
-import { listApplications } from "@/lib/store";
+import { listApplicationsOrNull } from "@/lib/store";
 import type { Platform, StoreApplication } from "@/lib/types";
 import { AppCard } from "@/components/app-card";
 
@@ -16,8 +16,13 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ q
   const platform = (["windows", "macos", "linux", "android"] as const).find((value) => value === filters.platform);
   let apps: StoreApplication[] = [];
   let demo = false;
-  try { apps = await listApplications({ publicOnly: true, query: filters.q?.slice(0, 100), category: filters.category?.slice(0, 60), platform: platform as Platform | undefined }); }
-  catch { if (process.env.NODE_ENV === "development") { apps = demoApps.filter((app) => (!filters.q || `${app.name} ${app.summary}`.toLowerCase().includes(filters.q.toLowerCase())) && (!platform || app.platforms.includes(platform))); demo = true; } }
+  const storedApps = await listApplicationsOrNull({ publicOnly: true, query: filters.q?.slice(0, 100), category: filters.category?.slice(0, 60), platform: platform as Platform | undefined });
+  if (storedApps) {
+    apps = storedApps;
+  } else if (process.env.NODE_ENV === "development") {
+    apps = demoApps.filter((app) => (!filters.q || `${app.name} ${app.summary}`.toLowerCase().includes(filters.q.toLowerCase())) && (!platform || app.platforms.includes(platform)));
+    demo = true;
+  }
   const categories = [...new Set(apps.map((app) => app.category))];
   const featured = apps.filter((app) => app.isFeatured);
   return (

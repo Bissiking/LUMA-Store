@@ -6,6 +6,45 @@ const updateRequest = `GET /api/v1/apps/harmonix/updates
   &arch=universal
   &channel=stable`;
 
+const downloadRequest = `GET /api/v1/apps/harmonix/download`;
+
+const targetedDownloadRequest = `GET /api/v1/apps/harmonix/download
+  ?platform=macos&arch=arm64&channel=stable`;
+
+const packagesRequest = `GET /api/v1/apps/harmonix/packages`;
+
+const packagesResponse = `{
+  "data": {
+    "slug": "harmonix",
+    "name": "Harmonix",
+    "packages": [
+      {
+        "version": "1.5.0",
+        "channel": "stable",
+        "platform": "android",
+        "architecture": "arm64",
+        "packageType": "apk",
+        "fileName": "harmonix-1.5.0.apk",
+        "sizeBytes": 28746123,
+        "sha256": "empreinte-sha256",
+        "downloadUrl": "https://store.example/api/v1/downloads/release-uuid"
+      },
+      {
+        "version": "1.5.0",
+        "channel": "stable",
+        "platform": "windows",
+        "architecture": "x64",
+        "packageType": "exe",
+        "fileName": "harmonix-1.5.0-x64.exe",
+        "sizeBytes": 52428800,
+        "sha256": "empreinte-sha256",
+        "downloadUrl": "https://store.example/api/v1/downloads/release-uuid"
+      }
+    ]
+  },
+  "meta": { "count": 6, "apiVersion": "v1" }
+}`;
+
 const availableResponse = `{
   "data": {
     "available": true,
@@ -58,6 +97,8 @@ export default function ApiDocs() {
   return <main className="page-shell"><div className="container docs-layout">
     <nav className="docs-nav" aria-label="Sommaire de l’API">
       <a href="#demarrage">Démarrage rapide</a>
+      <a href="#telechargement">Téléchargement auto</a>
+      <a href="#packages">Liste des packages</a>
       <a href="#parametres">Paramètres</a>
       <a href="#reponses">Réponses</a>
       <a href="#integration">Intégration</a>
@@ -79,6 +120,30 @@ export default function ApiDocs() {
         <p>Le slug <code>harmonix</code> identifie l’application dans le Store. Cet exemple cherche une mise à jour Android stable à partir de la version <code>1.4.0</code>.</p>
         <pre><code>{updateRequest}</code></pre>
         <p className="docs-note">Aucune clé API n’est nécessaire. Utilisez l’adresse publique de votre instance LUMA Store comme domaine.</p>
+      </section>
+
+      <section id="telechargement">
+        <h2>Téléchargement automatique</h2>
+        <p>L’endpoint <code>/download</code> fonctionne sans paramètre : il détecte le système d’exploitation du visiteur et redirige vers le binaire stable correspondant.</p>
+        <pre><code>{downloadRequest}</code></pre>
+        <p>Pour cibler précisément un package, trois paramètres optionnels et uniquement ceux-ci sont acceptés :</p>
+        <pre><code>{targetedDownloadRequest}</code></pre>
+        <div className="docs-table-wrap"><table className="docs-table">
+          <thead><tr><th>Paramètre</th><th>Obligatoire</th><th>Valeurs</th></tr></thead>
+          <tbody>
+            <tr><td><code>platform</code></td><td>Non</td><td><code>windows</code>, <code>macos</code>, <code>linux</code> ou <code>android</code>. Détecté depuis le User-Agent si absent.</td></tr>
+            <tr><td><code>arch</code></td><td>Non</td><td><code>x64</code>, <code>arm64</code> ou <code>universal</code>. Détectée si possible, sinon un package universel est privilégié.</td></tr>
+            <tr><td><code>channel</code></td><td>Non</td><td><code>stable</code>, <code>beta</code> ou <code>nightly</code>. Défaut : <code>stable</code></td></tr>
+          </tbody>
+        </table></div>
+        <p className="docs-note">Si aucune plateforme n’est détectée et aucun paramètre n’est fourni, l’utilisateur est redirigé vers la page web de l’application.</p>
+      </section>
+
+      <section id="packages">
+        <h2>Liste des packages</h2>
+        <p>L’endpoint <code>/packages</code> retourne tous les binaires disponibles pour une application, triés par version décroissante.</p>
+        <pre><code>{packagesRequest}</code></pre>
+        <pre><code>{packagesResponse}</code></pre>
       </section>
 
       <section id="parametres">
@@ -116,6 +181,8 @@ export default function ApiDocs() {
         <h2>Endpoints publics</h2>
         <div className="endpoint-list">
           <div><span className="http-method">GET</span><code>/api/v1/apps/{`{slug}`}/updates</code><p>Recherche la dernière version compatible.</p></div>
+          <div><span className="http-method">GET</span><code>/api/v1/apps/{`{slug}`}/download</code><p>Redirige vers le binaire adapté à la plateforme. Détecte l’OS depuis le User-Agent si aucun paramètre n’est fourni.</p></div>
+          <div><span className="http-method">GET</span><code>/api/v1/apps/{`{slug}`}/packages</code><p>Liste tous les packages disponibles pour une application.</p></div>
           <div><span className="http-method">GET</span><code>/api/v1/apps/{`{slug}`}</code><p>Retourne la fiche d’une application et ses versions publiées.</p></div>
           <div><span className="http-method">GET</span><code>/api/v1/downloads/{`{releaseId}`}</code><p>Télécharge le fichier associé à une version.</p></div>
           <div><span className="http-method">GET</span><code>/api/v1/meta</code><p>Décrit la version de l’API et les plateformes reconnues.</p></div>

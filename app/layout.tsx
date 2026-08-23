@@ -48,7 +48,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         {children}
         <footer className="site-footer">
           <div><span className="footer-mark">L</span><p><strong>LUMA Store</strong><br />Distribution logicielle vérifiée.</p></div>
-          <nav aria-label="Liens de pied de page"><Link href="/docs/api">API</Link><Link href="/install/linux">Linux</Link><Link href="/api/health">État du service</Link></nav>
+          <nav aria-label="Liens de pied de page"><Link href="/docs/api">API</Link><Link href="/health">État du service</Link></nav>
         </footer>
       </body>
     </html>

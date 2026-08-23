@@ -50,6 +50,8 @@ Pour un déploiement multi-instance, montez `STORAGE_DIR` sur un volume partagé
 - `GET /api/v1/meta`
 - `GET /api/v1/apps`
 - `GET /api/v1/apps/:slug`
+- `GET /api/v1/apps/:slug/download` (détection automatique de l'OS, sans paramètre obligatoire)
+- `GET /api/v1/apps/:slug/packages` (liste tous les packages publiés)
 - `GET /api/v1/apps/:slug/updates?current_version=1.0.0&platform=windows&arch=x64&channel=stable`
 - `GET /api/v1/downloads/:releaseId` (supporte `Range`)
 - `GET /install/linux`
