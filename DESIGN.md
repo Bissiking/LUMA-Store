@@ -296,4 +296,18 @@ La carte associe une icone de 64px, le nom et l'editeur, un resume, puis les pla
 - **Don't** utiliser l'iris, les ombres ou les capsules sur chaque element; leur rarete construit la hierarchie.
 - **Don't** cacher la plateforme, la version ou la provenance derriere une interaction secondaire.
 - **Don't** inventer de volumes de telechargement, de disponibilite ou de preuve sociale absents du produit.
+
+## Revue Store 1.0.0
+
+La refonte conserve les surfaces minérales, l’encre aubergine, l’iris, Sora et
+Manrope. Le hero est réduit ; les versions sont regroupées et l’historique
+replié. Les onglets applicatifs et les panneaux de médias reprennent les
+contrôles existants. Les actions d’icône disposent de cibles de 44 px.
+
+Revue visuelle effectuée sur le catalogue desktop, la fiche mobile et la gestion
+des versions. Les captures de vérification sont dans `.impeccable/screenshots/`.
+Verdict : présentation cohérente avec la charte, fiche mobile sans débordement
+horizontal, téléchargement principal et historique accessibles. Les captures
+utilisent des données de test isolées. Les dialogues natifs et les boutons
+de réordonnancement assurent une alternative clavier aux interactions souris.
 - **Don't** transmettre un statut uniquement par sa couleur.

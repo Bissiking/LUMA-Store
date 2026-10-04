@@ -4,7 +4,7 @@ LUMA Store distribue les applications de l’écosystème LUMA sur Windows, macO
 
 ## Démarrage local
 
-Prérequis : Node.js 20.9+ et Docker.
+Prérequis : Node.js 20.19+ ou 22.13+ et Docker.
 
 ```bash
 cp .env.example .env
@@ -83,4 +83,37 @@ npm run typecheck
 npm run lint
 npm test
 npm run build
+npm run test:e2e
 ```
+
+## Store 1.0.0
+
+Appliquez les migrations avant de démarrer cette version : `npm run db:migrate`.
+Le script conserve le schéma initial et applique les fichiers de `db/migrations/`
+une seule fois, dans une transaction. Les anciens binaires, les URLs d’icônes et
+les données publiées restent conservés.
+
+L’administration organise chaque application en Aperçu, Versions, Médias et
+Paramètres. La publication détecte les valeurs du nom de fichier, permet leur
+correction et demande la confirmation du résumé. Une correction de métadonnées
+conserve le fichier et son SHA-256. La rétention compte les versions distinctes,
+conserve la version courante et interdit le retrait des releases protégées.
+
+Les nouvelles icônes et captures sont hébergées par le Store (PNG/WEBP, 10 Mo).
+Les icônes externes existantes restent un secours jusqu’au premier upload ; leur
+URL historique reste en base. Après ce premier upload, supprimer l’icône ne
+réactive pas l’ancienne URL. Les captures peuvent être réordonnées à la souris
+ou avec les boutons Monter/Descendre, légendées et associées à une plateforme.
+
+Les paramètres globaux affichent la configuration active de l’environnement ;
+la visibilité, la mise en avant et la rétention de chaque application sont
+modifiables dans son onglet Paramètres. Masquer une release la retire des API
+publiques et du téléchargement public, tout en conservant l’accès administrateur.
+
+`GET /install/linux` fournit un script DEB/RPM utilisant les packages publiés
+et vérifiant leur SHA-256 avant installation. Il ne configure pas de dépôt APT/YUM.
+
+Les tests navigateur utilisent une base PGlite et un stockage temporaire isolés,
+avec une session de test créée uniquement dans cette base. Ils ne modifient pas
+le Store configuré. Après `npx playwright install chromium`, exécutez
+`npm run build` puis `npm run test:e2e`.

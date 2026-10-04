@@ -8,7 +8,7 @@ import { detectPlatform, matchRelease } from "@/lib/os-detect";
 
 const downloadQuery = z.object({
   platform: z.enum(["windows", "macos", "linux", "android"]).optional(),
-  arch: z.enum(["x64", "arm64", "universal"]).optional(),
+  arch: z.enum(["x64", "arm64", "x86", "universal", "other"]).optional(),
   channel: z.enum(["stable", "beta", "nightly"]).default("stable")
 }).strict();
 

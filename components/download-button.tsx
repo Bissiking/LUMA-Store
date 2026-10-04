@@ -9,14 +9,14 @@ const platformIcons: Record<Platform, typeof Laptop> = {
   windows: Laptop,
   macos: Boxes,
   linux: Terminal,
-  android: Smartphone
+  android: Smartphone,
 };
 
 const platformLabels: Record<Platform, string> = {
   windows: "Windows",
   macos: "macOS",
   linux: "Linux",
-  android: "Android"
+  android: "Android",
 };
 
 interface DownloadButtonProps {
@@ -30,29 +30,45 @@ const getServerUserAgent = () => null;
 
 export function DownloadButton({ slug, releases }: DownloadButtonProps) {
   const [selected, setSelected] = useState<Platform | null>(null);
-  const userAgent = useSyncExternalStore(subscribeToUserAgent, getBrowserUserAgent, getServerUserAgent);
+  const userAgent = useSyncExternalStore(
+    subscribeToUserAgent,
+    getBrowserUserAgent,
+    getServerUserAgent,
+  );
   const detectionComplete = userAgent !== null;
-  const clientDetected: { platform: Platform; architecture: Architecture } | null = detectPlatform(userAgent);
+  const clientDetected: {
+    platform: Platform;
+    architecture: Architecture;
+  } | null = detectPlatform(userAgent);
 
   const active = selected ?? clientDetected?.platform ?? null;
-  const architecture = selected ? null : clientDetected?.architecture ?? null;
+  const architecture = selected ? null : (clientDetected?.architecture ?? null);
 
-  const release = active
-    ? matchRelease(releases, active, architecture)
-    : null;
+  const release = active ? matchRelease(releases, active, architecture) : null;
 
-  const availablePlatforms = [...new Set(releases
-    .filter((r) => r.status === "published" && r.channel === "stable")
-    .map((r) => r.platform))];
+  const availablePlatforms = [
+    ...new Set(
+      releases
+        .filter((r) => r.status === "published" && r.channel === "stable")
+        .map((r) => r.platform),
+    ),
+  ];
 
   if (availablePlatforms.length === 0) {
-    return <button className="button button-secondary" disabled>Pas encore disponible</button>;
+    return (
+      <button className="button button-secondary" disabled>
+        Pas encore disponible
+      </button>
+    );
   }
 
   if (!detectionComplete) {
     return (
       <div className="download-section">
-        <a className="button button-primary download-main" href={`/api/v1/apps/${slug}/download`}>
+        <a
+          className="button button-primary download-main"
+          href={`/api/v1/apps/${slug}/download`}
+        >
           <Download size={18} /> Télécharger automatiquement
         </a>
         <span className="download-hint">Détection de votre système…</span>
@@ -68,7 +84,11 @@ export function DownloadButton({ slug, releases }: DownloadButtonProps) {
             ? `Aucun package compatible détecté pour ${platformLabels[clientDetected.platform]}. Choisissez une plateforme.`
             : "Système non identifié. Choisissez votre plateforme."}
         </p>
-        <div className="platform-selector" role="radiogroup" aria-label="Choisir une plateforme">
+        <div
+          className="platform-selector"
+          role="radiogroup"
+          aria-label="Choisir une plateforme"
+        >
           {availablePlatforms.map((platform) => {
             const Icon = platformIcons[platform];
             return (
@@ -87,11 +107,17 @@ export function DownloadButton({ slug, releases }: DownloadButtonProps) {
           })}
         </div>
         {selected && release ? (
-          <a className="button button-primary download-main" href={`/api/v1/apps/${slug}/download?platform=${selected}`}>
-            <Download size={18} /> Télécharger pour {platformLabels[selected]} {release.version}
+          <a
+            className="button button-primary download-main"
+            href={`/api/v1/apps/${slug}/download?platform=${selected}`}
+          >
+            <Download size={18} /> Télécharger pour {platformLabels[selected]}{" "}
+            {release.version}
           </a>
         ) : (
-          <a className="button button-secondary" href="#releases">Voir toutes les versions</a>
+          <a className="button button-secondary" href="#releases">
+            Voir toutes les versions
+          </a>
         )}
       </div>
     );
@@ -99,10 +125,16 @@ export function DownloadButton({ slug, releases }: DownloadButtonProps) {
 
   return (
     <div className="download-section">
-      <a className="button button-primary download-main" href={`/api/v1/apps/${slug}/download`}>
-        <Download size={18} /> Télécharger {release.version} pour {platformLabels[active!]}
+      <a
+        className="button button-primary download-main"
+        href={`/api/v1/apps/${slug}/download${selected ? `?platform=${selected}` : ""}`}
+      >
+        <Download size={18} /> Télécharger {release.version} pour{" "}
+        {platformLabels[active!]}
       </a>
-      <a className="link-subtle" href="#releases">Ou choisir une autre version</a>
+      <a className="link-subtle" href="#releases">
+        Ou choisir une autre version
+      </a>
     </div>
   );
 }

@@ -4,6 +4,8 @@ node_modules/
 .env.local
 storage/
 coverage/
+test-results/
+playwright-report/
 *.log
 .DS_Store
 *.tsbuildinfo

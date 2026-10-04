@@ -1,6 +1,7 @@
 export type Platform = "windows" | "macos" | "linux" | "android";
-export type Architecture = "x64" | "arm64" | "universal";
-export type PackageType = "apk" | "exe" | "msi" | "dmg" | "deb" | "rpm" | "appimage" | "tar.gz" | "zip";
+export type Architecture = "x64" | "arm64" | "x86" | "universal" | "other";
+export type PackageType =
+  "apk" | "exe" | "msi" | "dmg" | "deb" | "rpm" | "appimage" | "tar.gz" | "zip";
 export type Channel = "stable" | "beta" | "nightly";
 
 export interface StoreApplication {
@@ -12,7 +13,8 @@ export interface StoreApplication {
   publisher: string;
   iconUrl: string | null;
   category: string;
-  status: "draft" | "published" | "retired";
+  status: "draft" | "published" | "hidden" | "retired";
+  minimumVersionsToKeep?: number | null;
   isFeatured: boolean;
   platforms: Platform[];
   latestVersion: string | null;
@@ -20,6 +22,13 @@ export interface StoreApplication {
 }
 
 export interface Release {
+  originalFileName?: string | null;
+  detectedVersionRaw?: string | null;
+  detectedArchitectureRaw?: string | null;
+  detectedPackageRaw?: string | null;
+  detectedDistributionRaw?: string | null;
+  distribution?: string | null;
+  isPublic?: boolean;
   id: string;
   applicationId: string;
   version: string;
@@ -35,4 +44,17 @@ export interface Release {
   isProtected: boolean;
   status: "pending" | "published" | "withdrawn";
   publishedAt: string | null;
+}
+
+export interface ApplicationMedia {
+  id: string;
+  applicationId: string;
+  kind: "icon" | "screenshot";
+  url: string;
+  width: number;
+  height: number;
+  sizeBytes: number;
+  caption: string;
+  platform: Platform | null;
+  sortOrder: number;
 }

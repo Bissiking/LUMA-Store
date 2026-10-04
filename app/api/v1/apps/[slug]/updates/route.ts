@@ -8,7 +8,7 @@ import { rateLimit, clientKey } from "@/lib/rate-limit";
 const updateQuery = z.object({
   current_version: z.string().min(1).max(64),
   platform: z.enum(["windows", "macos", "linux", "android"]),
-  arch: z.enum(["x64", "arm64", "universal"]).default("universal"),
+  arch: z.enum(["x64", "arm64", "x86", "universal", "other"]).default("universal"),
   channel: z.enum(["stable", "beta", "nightly"]).default("stable")
 });
 

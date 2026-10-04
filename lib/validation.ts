@@ -1,6 +1,11 @@
 import { z } from "zod";
 
-export const slugSchema = z.string().trim().min(2).max(80).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+export const slugSchema = z
+  .string()
+  .trim()
+  .min(2)
+  .max(80)
+  .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
 export const uuidSchema = z.string().uuid();
 
 export const applicationInput = z.object({
@@ -14,30 +19,110 @@ export const applicationInput = z.object({
   websiteUrl: z.string().url().max(2_000).nullable().optional(),
   repositoryUrl: z.string().url().max(2_000).nullable().optional(),
   isFeatured: z.boolean().default(false),
-  status: z.enum(["draft", "published", "retired"]).default("draft")
+  platforms: z
+    .array(z.enum(["windows", "macos", "linux", "android"]))
+    .max(4)
+    .default([]),
+  minimumVersionsToKeep: z
+    .number()
+    .int()
+    .min(5)
+    .max(1000)
+    .nullable()
+    .optional(),
+  status: z.enum(["draft", "published", "hidden", "retired"]).default("draft"),
 });
 
 export const releaseInput = z.object({
   applicationId: uuidSchema,
-  version: z.string().trim().min(1).max(64).regex(/^v?\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/),
+  version: z
+    .string()
+    .trim()
+    .min(1)
+    .max(64)
+    .regex(/^v?\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/),
   channel: z.enum(["stable", "beta", "nightly"]).default("stable"),
   platform: z.enum(["windows", "macos", "linux", "android"]),
-  architecture: z.enum(["x64", "arm64", "universal"]).default("universal"),
-  packageType: z.enum(["apk", "exe", "msi", "dmg", "deb", "rpm", "appimage", "tar.gz", "zip"]),
+  architecture: z
+    .enum(["x64", "arm64", "x86", "universal", "other"])
+    .default("universal"),
+  packageType: z.enum([
+    "apk",
+    "exe",
+    "msi",
+    "dmg",
+    "deb",
+    "rpm",
+    "appimage",
+    "tar.gz",
+    "zip",
+  ]),
   minimumOs: z.string().trim().max(80).nullable().optional(),
   releaseNotes: z.string().trim().max(40_000).default(""),
-  isProtected: z.boolean().default(false)
+  isProtected: z.boolean().default(false),
+  isPublic: z.boolean().default(true),
+  distribution: z.string().trim().max(80).nullable().optional(),
+  originalFileName: z.string().max(255).nullable().optional(),
+  detectedVersionRaw: z.string().max(255).nullable().optional(),
+  detectedArchitectureRaw: z.string().max(255).nullable().optional(),
+  detectedPackageRaw: z.string().max(255).nullable().optional(),
+  detectedDistributionRaw: z.string().max(255).nullable().optional(),
 });
 
+export const releasePatchInput = z
+  .object({
+    version: releaseInput.shape.version.optional(),
+    channel: releaseInput.shape.channel.removeDefault().optional(),
+    platform: releaseInput.shape.platform.optional(),
+    architecture: releaseInput.shape.architecture.removeDefault().optional(),
+    packageType: releaseInput.shape.packageType.optional(),
+    minimumOs: releaseInput.shape.minimumOs,
+    releaseNotes: releaseInput.shape.releaseNotes.removeDefault().optional(),
+    isProtected: z.boolean().optional(),
+    isPublic: z.boolean().optional(),
+    distribution: releaseInput.shape.distribution,
+  })
+  .strict();
+
+export const applicationPatchInput = z
+  .object({
+    name: applicationInput.shape.name.optional(),
+    slug: applicationInput.shape.slug.optional(),
+    summary: applicationInput.shape.summary.optional(),
+    description: applicationInput.shape.description.removeDefault().optional(),
+    publisher: applicationInput.shape.publisher.removeDefault().optional(),
+    category: applicationInput.shape.category.removeDefault().optional(),
+    iconUrl: applicationInput.shape.iconUrl,
+    websiteUrl: applicationInput.shape.websiteUrl,
+    repositoryUrl: applicationInput.shape.repositoryUrl,
+    isFeatured: z.boolean().optional(),
+    platforms: applicationInput.shape.platforms.removeDefault().optional(),
+    status: applicationInput.shape.status.removeDefault().optional(),
+    minimumVersionsToKeep: applicationInput.shape.minimumVersionsToKeep,
+  })
+  .strict();
+
 const extensionByType: Record<string, string[]> = {
-  apk: [".apk"], exe: [".exe"], msi: [".msi"], dmg: [".dmg"], deb: [".deb"], rpm: [".rpm"],
-  appimage: [".appimage"], "tar.gz": [".tar.gz", ".tgz"], zip: [".zip"]
+  apk: [".apk"],
+  exe: [".exe"],
+  msi: [".msi"],
+  dmg: [".dmg"],
+  deb: [".deb"],
+  rpm: [".rpm"],
+  appimage: [".appimage"],
+  "tar.gz": [".tar.gz", ".tgz"],
+  zip: [".zip"],
 };
 
 export function validateArtifactName(fileName: string, packageType: string) {
   const safe = fileName.replace(/[^a-zA-Z0-9._-]/g, "_").slice(0, 180);
-  if (!safe || safe.startsWith(".")) throw new Error("Nom de fichier invalide.");
-  if (!(extensionByType[packageType] ?? []).some((extension) => safe.toLowerCase().endsWith(extension))) {
+  if (!safe || safe.startsWith("."))
+    throw new Error("Nom de fichier invalide.");
+  if (
+    !(extensionByType[packageType] ?? []).some((extension) =>
+      safe.toLowerCase().endsWith(extension),
+    )
+  ) {
     throw new Error(`L'extension ne correspond pas au format ${packageType}.`);
   }
   return safe;
@@ -51,11 +136,13 @@ const signatures: Record<string, number[][]> = {
   deb: [[0x21, 0x3c, 0x61, 0x72, 0x63, 0x68, 0x3e, 0x0a]],
   rpm: [[0xed, 0xab, 0xee, 0xdb]],
   appimage: [[0x7f, 0x45, 0x4c, 0x46]],
-  "tar.gz": [[0x1f, 0x8b]]
+  "tar.gz": [[0x1f, 0x8b]],
 };
 
 export function validateArtifactMagic(bytes: Buffer, packageType: string) {
   const expected = signatures[packageType];
   if (!expected) return true; // DMG ne possède pas de signature fiable en tête de fichier.
-  return expected.some((signature) => signature.every((value, index) => bytes[index] === value));
+  return expected.some((signature) =>
+    signature.every((value, index) => bytes[index] === value),
+  );
 }

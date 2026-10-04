@@ -37,7 +37,7 @@ export function matchRelease(
   channel: Channel = "stable"
 ): Release | null {
   return releases
-    .filter((r) => r.status === "published")
+    .filter((r) => r.status === "published" && r.isPublic !== false)
     .filter((r) => r.platform === platform && r.channel === channel)
     .filter((r) => architecture === null || r.architecture === architecture || r.architecture === "universal")
     .filter((r) => semver.valid(semver.coerce(r.version)))
